@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Add a new material {% endblock title %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+    <div class="create-product-main">
+        <div class="form-material">
+            <form method="post" class="create-form" enctype="multipart/form-data">{% csrf_token %}
+                <div class="form-item">
+                    <label for="id_material">Name </label>
+                    {{ form.material }}
+                </div>
+                <div class="btn">
+                    <button type="submit" class="create-prod-btn">Add material</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}

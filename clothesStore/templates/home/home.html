@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Home {% endblock title %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+    <div class="main-home">
+        <div class="male">
+            <div class="man">
+                <button class="title-section"><h2>Masculine</h2></button>
+            </div>
+            <div class="categories-man" id="categories-man">
+                {% for category in men_categories %}
+                    <a href="{% url 'products_app:products_category' category.id %}" class="category">{{ category.name }}</a>
+                {% endfor %}
+            </div> 
+        </div>
+        <div class="female">
+            <div class="woman">
+                <button class="title-section"><h2>Femenine</h2></button>
+            </div> 
+            <div class="categories-woman" id="categories-woman">
+                {% for category in women_categories %}
+                    <a href="{% url 'products_app:products_category' category.id %}" class="category">{{ category.name }}</a>
+                {% endfor %}
+            </div> 
+        </div>
+       
+    </div>
+    
+{% endblock content %}
+
+{% block js %}
+    <script src=" {% static 'js/app.js' %} "></script>
+{% endblock js %}
+    
+
+    
+    

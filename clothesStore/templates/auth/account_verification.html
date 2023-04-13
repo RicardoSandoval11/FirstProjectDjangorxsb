@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Verification account
+{% endblock title %}
+
+
+{% block content %}
+
+    {% include 'includes/header.html' %}
+
+    <div class="main-login">
+        <div class="login">
+            <form method="post" class="login-form">{% csrf_token %}
+                <div class="form-item">
+                    <label for="id_code">Code:</label>
+                    {{form.code_register}}
+                </div>
+                <button type="submit" class="login-btn">Confirm</button>
+            </form>
+        </div>
+    </div>
+
+    
+{% endblock content %}
+    
+    

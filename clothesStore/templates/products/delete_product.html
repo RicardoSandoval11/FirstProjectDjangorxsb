@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Delete product {% endblock title %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+    <div class="remove-prod-main">
+        <div class="alert">
+            <p class="remove-title">
+                Do you want to remove this product from the inventory?
+            </p>
+            <p class="rmv-message">
+                Once you remove this item, you won´t be able to recover the register
+            </p>
+            <form method="post" class="remove-form">{% csrf_token %}
+                <button type="submit" class="rmv-btn rmv-prod">Delete</button>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock content %}

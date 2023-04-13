@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %} 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+{% endblock css %}
+
+
+{% block title %} Car Shop {% endblock title %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+    <div class="main-carshop">
+        {% if products %}
+            <div class="table">
+                <div class="header-table">
+                    <div class=" car-titles carshop-titles-prod">Product</div>
+                    <div class=" car-titles carshop-titles">Amount</div>
+                    <div class=" car-titles carshop-titles">Total Price</div>
+                    <div class=" car-titles carshop-titles">actions</div>
+                </div>
+                <div class="body-table">
+                    {% for sale in sales %}
+                    <div class="row">
+                        <div class="carshop-product"> 
+                            <div class="name">
+                                {{ sale.product.name }}
+                            </div>
+                            <div class="image">
+                                <img src="{{ sale.product.image1.url }}">
+                            </div>
+                        </div>
+                        <div class="prod-amount">{{ sale.amout_product }}</div>
+                        <div class="price-subtotal">{{ sale.total_amount }}</div>
+                        <div class="carshop-actions">
+                            
+                            {% if sale.amout_product >= sale.product.stock  %}
+                            {% else %}
+                                <form action="{% url 'products_app:add-to-car' sale.product.id %}" method="post">{% csrf_token %}
+                                    <button type="submit" class="add-btn">Add</button>
+                                </form>
+                            {% endif %}
+                            <form action="{% url 'products_app:remove-from-car' sale.id %}" method="post">{% csrf_token %}
+                                <button type="submit" class="rmv-btn">Remove</button>
+                            </form>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="row buy">
+                        <a href="{% url 'sales_app:process-sale' %}" class="buy-btn">Buy</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="no-offers-content">
+                <div class="warning-alert">
+                    <p class="warning-title">
+                        No products in your Car
+                    </p>
+                    <p class="warning-message">
+                        Check our products section 
+                    </p>
+                </div>
+            </div>
+        {% endif %}
+        
+    </div>
+
+
+{% endblock content %}
+
+
+    

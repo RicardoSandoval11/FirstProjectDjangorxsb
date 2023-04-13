@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Users {% endblock title %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+    <div class="main-all-sales main-users">
+            <div class="table-sale users-table">
+                <div class="table-sale-headers">
+                    <div class="sale-header">
+                        Full name
+                    </div>
+                    <div class="sale-header user-email-item">
+                        Email
+                    </div>
+                    <div class="sale-header">
+                        Ocupation
+                    </div>
+                    <div class="sale-header">
+                        Active
+                    </div>
+                    <div class="sale-header">
+                        Actions
+                    </div>
+                </div>
+                {% for user in users %}
+                    <div class="table-sale-row">
+                        <div class="table-item id">
+                            {{ user.full_name }}
+                        </div>    
+                        <div class="table-item user-email-item">
+                            {{ user.email }}
+                        </div>  
+                        <div class="table-item">
+                            {{ user.get_ocupation_display }}
+                        </div>  
+                        <div class="table-item">
+                            {% if user.is_active %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                        </div>
+                        <div class="table-item sale-actions">
+                            <a href="{% url 'users_app:user-details' user.id %}" class="view-details-sale">Details</a>
+                            
+                            {% if user.is_active  %}
+                                <form method="post" action="{% url 'users_app:block-user' user.id %}" class="form-remove-sale">{% csrf_token %}
+                                    <button type="submit" class="remove-sale">Block</button>
+                                </form>
+                            {% else %} 
+                                <form method="post" action="{% url 'users_app:allow-user' user.id %}" class="form-remove-sale">{% csrf_token %}
+                                    <button type="submit" class="allow-user">Allow</button>
+                                </form>   
+                            {% endif %}
+                                
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="paginator">   
+                {% if is_paginated %}
+                    <nav class="navigation-pages">
+                        <ul class="pagination">
+                            
+                        {% if page_obj.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>  
+                        {% endif %}
+                        
+                        {% for page in paginator.page_range %}
+        
+                            {% if page == page_obj.number  %}
+                                <li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>    
+                            {% else %}           
+                                <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+                            {% endif %}
+                                
+                        {% endfor %}
+                        
+                        {% if page_obj.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a></li>                            
+                        {% endif %}
+                            
+                        </ul>
+                    </nav>
+                {% endif %}
+            </div>
+        
+    </div>
+{% endblock content %}

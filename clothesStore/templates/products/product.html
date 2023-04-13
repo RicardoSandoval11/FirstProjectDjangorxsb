@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %} 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+{% endblock css %}
+
+
+{% block title %} Product {% endblock title %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+<div class="main-container">
+    <div class="prod-image">
+        <img src="{{ product.image1.url }}" alt="{{ product.name }}">
+    </div>
+    <div class="prod-info">
+        <div class="prod-name">
+            {{ product.name }}
+        </div>
+        <div class="other-images">
+            <div class="img-des">
+                <img src="{{ product.image2.url }}" alt="{{ product.name }}">
+            </div>
+            <div class="img-des">
+                <img src="{{ product.image3.url }}" alt="{{product.name}}">
+            </div>
+        </div>
+        <div class="prod-price">
+            {% if product.is_offer %}
+                <span>Price: </span> {{ product.offer_price }}
+            {% else %}
+                <span>Price: </span> {{ product.price }}
+            {% endif %}
+        </div>
+        <div class="available-colors">
+            <div class="colors-title">
+                Available colors:
+            </div>
+            <div class="colors">
+                {% for color in product.colors.all %}
+                <div class="color">{{ color }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="size">
+            <div class="title">Size: </div> 
+            <div class="body">
+                {{ product.get_size_display }}
+            </div> 
+        </div>
+        <div class="modify-options">
+            {% if user.ocupation == '0' or user.ocupation == '1' %}
+                <a href="{% url 'products_app:edit-product' product.id %}" class="edit" title="Edit"><span class="material-symbols-outlined">edit</span></a>                    
+            {% endif %}
+        </div>
+        <div class="buy-options">
+            
+            {% if user.is_authenticated and product.stock > 0%}
+            <form method="post" action="{% url 'products_app:add-to-wish' product.id %}">{% csrf_token %}
+                <button  class="wish-btn" type="submit">
+                    Add to my wish list 
+                </button>
+            </form>
+            {% endif %}
+            
+            {% if product.stock > 0 %}
+                <form method="post" action="{% url 'products_app:add-to-car' product.id %}">{% csrf_token %}
+                    <button  class="car-btn" type="submit">
+                        Add to my Car shop
+                    </button>
+                </form>
+            {% endif %}
+                
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %} 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+{% endblock css %}
+
+
+{% block title %} Complete purchase {% endblock title %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+    <div class="main-complete-purchase">
+        <form method="post" class="create-form">{% csrf_token %}
+            <div class="form-item complete-sale">
+                <label for="id_payment_type">Payment type</label>
+                {{form.payment_type}}
+            </div>
+            <button type="submit" class="buy-btn">Complete purchase</button>
+        </form>
+    </div>
+{% endblock content %}

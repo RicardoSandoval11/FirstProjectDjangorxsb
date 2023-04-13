@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %} 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+{% endblock css %}
+
+
+{% block title %} Product options {% endblock title %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+    <div class="main-add-product">
+        <div class="add-options">
+            <li class="list-item-panel add-product-btn"><a class="link-panel black" href="{% url 'products_app:create-product' %}" >Create product</a></li>
+            <li class="list-item-panel add-product-btn"><a class="link-panel black" href="{% url 'products_app:add-new-category' %}" >Create category</a></li>
+            <li class="list-item-panel add-product-btn"><a class="link-panel black" href="{% url 'products_app:add-new-material' %}" >Add clothes' material</a></li>
+            <li class="list-item-panel add-product-btn"><a class="link-panel black" href="{% url 'products_app:add-new-color' %}" >Add a new color</a></li>
+        </div>
+    </div>
+{% endblock content %}

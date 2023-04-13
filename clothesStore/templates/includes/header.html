@@ -1,0 +1,23 @@
+{% load static %}
+<div class="header">
+    <nav class="navigation" id="navigation">
+        <ul class="list">
+            <li class="nav-item first"><a href="{% url 'home_app:home' %}" class="link">Home</a></li>
+            <li class="nav-item"><a href="{% url 'products_app:offer-products' %}" class="link">Offers</a></li>
+            {% if user.ocupation == '0' %}
+                <li class="nav-item"><a href="{% url 'home_app:admin-panel' %}" class="link">Admin panel</a></li>
+            {% endif %}
+            {% if user.ocupation == '1' %}
+                <li class="nav-item"><a href="{% url 'home_app:worker-panel' %}" class="link">Worker panel</a></li>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <li class="nav-item"><a href="{% url 'sales_app:car-shop' %}" class="link">Car shop</a></li>
+                <li class="nav-item"><a href="{% url 'products_app:wish-list' %}" class="link">Wish List</a></li>
+                <li class="nav-item"><a href="{% url 'users_app:logout' %}" class="link">Logout</a></li>
+            {% else %}
+                <li class="nav-item"><a href="{% url 'users_app:login' %}" class="link">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+    <script src=" {% static 'js/jquery-3.6.2.min.js' %} "></script>

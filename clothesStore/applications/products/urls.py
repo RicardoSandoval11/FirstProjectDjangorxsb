@@ -1,0 +1,107 @@
+from django.urls import path
+
+# import views
+from .views import (
+    ProductsByCategoryView,
+    ProductDetailsView,
+    ProductDeleteConfirmatioView,
+    UpdateProductInfoView,
+    ListOfferProductsView,
+    AddToCarView,
+    RemoveFromCarView,
+    CreateProductView,
+    WishListView,
+    AddProductWishListView,
+    RemoveFromWishListView,
+    GetOutOfStockProducts,
+    AddProductView,
+    CreateCategoryView,
+    CreateProductMaterialView,
+    CreateProductColorView
+)
+
+app_name = 'products_app'
+
+
+urlpatterns = [
+    path(
+        'products-category/<pk>',
+        ProductsByCategoryView.as_view(),
+        name='products_category'
+    ),
+    path(
+        'product-details/<pk>',
+        ProductDetailsView.as_view(),
+        name='product_detail'
+    ),
+    path(
+        'delete-product/<pk>',
+        ProductDeleteConfirmatioView.as_view(),
+        name='delete-product'
+    ),
+    path(
+        'update-product/<pk>',
+        UpdateProductInfoView.as_view(),
+        name='edit-product'
+    ),
+    path(
+        'offers/',
+        ListOfferProductsView.as_view(),
+        name='offer-products'
+    ),
+    path(
+        'add/<pk>',
+        AddToCarView.as_view(),
+        name='add-to-car'
+    ),
+    path(
+        'remove/<pk>',
+        RemoveFromCarView.as_view(),
+        name='remove-from-car'
+    ),
+    path(
+        'create-product/',
+        CreateProductView.as_view(),
+        name='create-product'
+    ),
+    path(
+        'wish-list/',
+        WishListView.as_view(),
+        name='wish-list'
+    ),
+    path(
+        'add-to-wish/<pk>',
+        AddProductWishListView.as_view(),
+        name='add-to-wish'
+    ),
+    path(
+        'remove-from-wishlist/<pk>',
+        RemoveFromWishListView.as_view(),
+        name='remove-from-wish' 
+    ),
+    path(
+        'out-of-stock/',
+        GetOutOfStockProducts.as_view(),
+        name='out-of-stock'
+    ),
+    path(
+        'add-new-product/',
+        AddProductView.as_view(),
+        name='add-new-product'
+    ),
+    path(
+        'add-new-category/',
+        CreateCategoryView.as_view(),
+        name='add-new-category'
+    ),
+    path(
+        'add-new-material/',
+        CreateProductMaterialView.as_view(),
+        name='add-new-material'
+    ),
+    path(
+        'add-new-color/',
+        CreateProductColorView.as_view(),
+        name='add-new-color'
+    ),
+]

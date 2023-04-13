@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Details {% endblock title %}
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+    <div class="main-user-details">
+        <div class="content">
+            <div class="user-name">
+                {{ user.full_name }}
+            </div>
+            <div class="body">
+                <div class="user-data">
+                    <strong>Email: </strong>{{ user.email }}
+                </div>
+                <div class="user-data">
+                    <strong>Active: </strong>
+                    {% if user.is_active %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                        
+                </div>
+                <div class="user-data">
+                    <strong>Last connection: </strong>{{ user.last_login }}
+                </div>
+                <div class="user-data">
+                    <strong>Role: </strong>{{ user.get_ocupation_display }}
+                </div>
+                <div class="user-data user-data-last">
+                    <strong>Gender: </strong>{{ user.get_gender_display }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
